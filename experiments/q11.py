@@ -1,19 +1,71 @@
+
 # ==============================================================================
+# Working
 # Q11. Iris: K-Means with Silhouette Score
 # ==============================================================================
-import numpy as np, pandas as pd, matplotlib.pyplot as plt
+
+import numpy as np
+import matplotlib.pyplot as plt
+
 from sklearn.datasets import load_iris
-iris = load_iris(as_frame=True)
-df = iris.data
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
-km = KMeans(n_clusters=3, n_init=10, random_state=42)
-labels = km.fit_predict(df)
-print('Cluster sizes:', np.bincount(labels))
-print('Silhouette Score:', round(silhouette_score(df, labels), 4))
+# 1. Load the Iris dataset
+iris = load_iris()
+X = iris.data
+features = iris.feature_names
 
-plt.figure(figsize=(6, 4.5))
-plt.scatter(df.iloc[:, 2], df.iloc[:, 3], c=labels, cmap='viridis', alpha=0.8)
-plt.scatter(km.cluster_centers_[:, 2], km.cluster_centers_[:, 3], c='red', marker='X', s=200, label='Centroids')
-plt.xlabel('petal length (cm)'); plt.ylabel('petal width (cm)'); plt.title('K-Means (k = 3)'); plt.legend(); plt.show()
+# 2. Apply K-Means clustering
+km = KMeans(
+    n_clusters=3,
+    n_init=10,
+    random_state=42
+)
+
+labels = km.fit_predict(X)
+
+# 3. Calculate cluster sizes
+cluster_sizes = np.bincount(labels)
+
+print("=" * 45)
+print("IRIS K-MEANS CLUSTERING")
+print("=" * 45)
+
+for i, size in enumerate(cluster_sizes):
+    print(f"Cluster {i}: {size} samples")
+
+# 4. Calculate Silhouette Score
+score = silhouette_score(X, labels)
+print(f"\nSilhouette Score: {score:.4f}")
+
+# 5. Plot clusters using petal length and petal width
+plt.figure(figsize=(7, 5))
+
+plt.scatter(
+    X[:, 2],
+    X[:, 3],
+    c=labels,
+    cmap="viridis",
+    alpha=0.8,
+    edgecolors="black",
+    label="Data points"
+)
+
+# Plot cluster centroids
+plt.scatter(
+    km.cluster_centers_[:, 2],
+    km.cluster_centers_[:, 3],
+    c="red",
+    marker="X",
+    s=200,
+    edgecolors="black",
+    label="Centroids"
+)
+
+plt.xlabel("Petal length (cm)")
+plt.ylabel("Petal width (cm)")
+plt.title("K-Means Clustering (k = 3)")
+plt.legend()
+plt.tight_layout()
+plt.show()
