@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 results = {}
 
-for i in range(1, 16):
+for i in range(1, 19):
     qid = f"q{i}"
     filepath = f"experiments/q{i}.py"
     

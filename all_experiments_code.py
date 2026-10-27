@@ -513,3 +513,101 @@ importance = pd.Series(
 print("Top 5 Important Features:")
 print(importance.sort_values(ascending=False).head(5))
 
+
+# ==============================================================================
+# Q16. Breast Cancer: Maximum Likelihood Estimation (MLE) - Bernoulli Distribution
+# ==============================================================================
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_breast_cancer
+
+# Load Dataset
+data = load_breast_cancer(as_frame=True)
+df = data.frame
+df["target"] = data.target
+print("=" * 60)
+print("First Five Records")
+print("=" * 60)
+print(df.head())
+
+# Bernoulli Distribution MLE
+target = df["target"]
+p_hat = np.mean(target)
+print("Maximum Likelihood Estimation (MLE)")
+print("Estimated Probability =", round(p_hat, 4))
+print("Malignant =", sum(target == 0))
+print("Benign =", sum(target == 1))
+
+target.value_counts().plot(kind="bar", color=["green", "red"])
+plt.title("Bernoulli Distribution - Target Classes")
+plt.xlabel("Target Class")
+plt.ylabel("Count")
+plt.xticks([0, 1], ["Benign", "Malignant"], rotation=0)
+plt.show()
+
+
+# ==============================================================================
+# Q17. California Housing: Central Limit Theorem (CLT) Simulation
+# ==============================================================================
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_california_housing
+
+# Load Dataset
+housing = fetch_california_housing(as_frame=True)
+df = housing.frame
+print("=" * 60)
+print("First Five Records")
+print("=" * 60)
+print(df.head())
+
+# Select Feature
+population = df["MedInc"]
+print("\nPopulation Size =", len(population))
+
+# CLT Simulation
+sample_size = 30
+num_samples = 1000
+sample_means = []
+
+for i in range(num_samples):
+    sample = population.sample(sample_size, replace=True)
+    sample_means.append(sample.mean())
+
+sample_means = np.array(sample_means)
+print("\nAverage of Sample Means =", sample_means.mean())
+print("Standard Deviation =", sample_means.std())
+
+
+# ==============================================================================
+# Q18. Titanic: Data Preprocessing (Deletion, Mean/Median/Mode Imputation)
+# ==============================================================================
+
+import pandas as pd
+
+df = pd.read_csv("https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv")
+
+print("Missing Values Before Preprocessing:")
+print(df.isnull().sum())
+
+# Deletion method
+df.dropna(subset=["Embarked"], inplace=True)
+
+# Imputation using mean
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+
+# Imputation using median
+df["Fare"] = df["Fare"].fillna(df["Fare"].median())
+
+# Imputation using mode
+df["Embarked"] = df["Embarked"].fillna(df["Embarked"].mode()[0])
+
+print("\nMissing Values After Preprocessing:")
+print(df.isnull().sum())
+
+print("\nFirst Five Records:")
+print(df.head())

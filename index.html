@@ -6,7 +6,7 @@
   <title>Statistics for ML and Data Science: Practical Exam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description"
-    content="Browse 15 statistics and machine learning practical questions with searchable Python code, topic filters, bookmarks, and study progress.">
+    content="Browse 18 statistics and machine learning practical questions with searchable Python code, topic filters, bookmarks, and study progress.">
   <style>
     :root {
       --bg: #f7fafc;
@@ -989,6 +989,7 @@
         style="padding:4px 8px;font-size:13px">&DownArrowBar; iris.csv</a><a href="diabetes.csv" download="diabetes.csv"
         style="padding:4px 8px;font-size:13px">&DownArrowBar; diabetes.csv</a><a href="breast_cancer.csv"
         download="breast_cancer.csv" style="padding:4px 8px;font-size:13px">&DownArrowBar; breast_cancer.csv</a>
+      <a href="titanic.csv" download="titanic.csv" style="padding:4px 8px;font-size:13px">&DownArrowBar; titanic.csv</a>
       <div class="ng">Experiment 2: Descriptive statistics and EDA</div><a href="#q1">Q1. Iris</a><a href="#q2">Q2.
         Diabetes</a>
       <div class="ng">Experiment 3: Correlation, distance measures and preprocessing</div><a href="#q3">Q3. Iris</a><a
@@ -1004,10 +1005,11 @@
         href="#q12">Q12. Iris</a>
       <div class="ng">Experiment 9: Model validation and explainability</div><a href="#q13">Q13. Breast Cancer</a><a
         href="#q14">Q14. Breast Cancer</a><a href="#q15">Q15. Breast Cancer</a>
+      <div class="ng">Experiment 10: Maximum Likelihood &amp; Sampling Distributions</div><a href="#q16">Q16. Breast Cancer: Bernoulli MLE</a><a href="#q17">Q17. California Housing: CLT</a><a href="#q18">Q18. Titanic: Preprocessing</a>
     </nav>
     <main>
       <h1>Statistics for Machine Learning and Data Science: Practical Exam</h1>
-      <p class="lead">All 15 questions from the question bank, with working Python code, the real output from running
+      <p class="lead">All 18 questions from the question bank, with working Python code, the real output from running
         it, and a short explanation. Every dataset loads from scikit-learn, so no download is needed. Run the code in
         Jupyter, Colab or any Python 3 environment with numpy, pandas, scipy, matplotlib and scikit-learn.</p>
       <div class="run-hint"
@@ -1017,7 +1019,7 @@
         shorter: <code>python -m pip install numpy pandas matplotlib scikit-learn</code><br>Then run any question file,
         e.g. <code>python experiments/q1.py</code>, or download <code>all_experiments_code.py</code> for everything.
       </div>
-      <div class="ds"><code>load_iris()</code><code>load_diabetes()</code><code>load_breast_cancer()</code></div>
+      <div class="ds"><code>load_iris()</code><code>load_diabetes()</code><code>load_breast_cancer()</code><code>fetch_california_housing()</code><code>titanic.csv</code></div>
 
       <div class="feature-toolbar" id="featureToolbar" aria-label="Question filters">
         <label for="topicFilter">Browse by topic
@@ -1041,6 +1043,8 @@
             <option value="iris">Iris</option>
             <option value="diabetes">Diabetes</option>
             <option value="breast-cancer">Breast Cancer</option>
+            <option value="housing">California Housing</option>
+            <option value="titanic">Titanic</option>
             <option value="mixed">Other / multiple datasets</option>
           </select>
         </label>
@@ -1060,12 +1064,12 @@
         </div>
       </div>
       <div class="progress-wrap" aria-live="polite">
-        <strong id="progressText">Study progress: 0 of 15 completed</strong>
-        <div class="progress-track" role="progressbar" aria-label="Study progress" aria-valuemin="0" aria-valuemax="15"
+        <strong id="progressText">Study progress: 0 of 18 completed</strong>
+        <div class="progress-track" role="progressbar" aria-label="Study progress" aria-valuemin="0" aria-valuemax="18"
           aria-valuenow="0" id="progressBar">
           <div class="progress-fill" id="progressFill"></div>
         </div>
-        <span id="resultCount" class="result-count" style="margin:0">Showing 15 questions</span>
+        <span id="resultCount" class="result-count" style="margin:0">Showing 18 questions</span>
       </div>
       <div id="noQuestions" class="no-questions" hidden>No questions match these filters. Try clearing the search or
         filters.</div>
@@ -1077,7 +1081,7 @@
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          <span><strong>Download All Code</strong> (.py &bull; 15 Questions)</span>
+          <span><strong>Download All Code</strong> (.py &bull; 18 Questions)</span>
         </button>
         <a href="iris.csv" download="iris.csv" class="dl-card">
           <svg viewBox="0 0 24 24">
@@ -1105,6 +1109,15 @@
             <line x1="9" y1="15" x2="15" y2="15" />
           </svg>
           <span><strong>breast_cancer.csv</strong> (569 rows)</span>
+        </a>
+        <a href="titanic.csv" download="titanic.csv" class="dl-card">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="12" y1="18" x2="12" y2="12" />
+            <line x1="9" y1="15" x2="15" y2="15" />
+          </svg>
+          <span><strong>titanic.csv</strong> (891 rows)</span>
         </a>
       </div>
       <h2 class="grp">Experiment 2: Descriptive statistics and EDA</h2>
@@ -1991,6 +2004,210 @@ dtype: float64</pre>
           large std are not reliable, so correlated features can share importance.</p><button class="btn-top"
           id="btnTop" onclick="scrollToTop()" aria-label="Back to top">↑ Top</button>
       </section>
+    
+      <h2 class="grp">Experiment 10: Maximum Likelihood &amp; Sampling Distributions</h2>
+      <section id="q16">
+        <h3>Q16. Breast Cancer: Maximum Likelihood Estimation (MLE) - Bernoulli Distribution</h3>
+        <p class="q"><b>Question.</b> Perform Maximum Likelihood Estimation (MLE) for a Bernoulli distribution on Breast Cancer target classes (benign vs malignant) and visualize the class distribution.</p>
+        <p><b>Concept.</b> Maximum Likelihood Estimation (MLE) finds parameter values that maximize the likelihood function. For a Bernoulli distribution where outcomes are 0 and 1, the MLE estimate for probability p is the sample mean (p_hat = mean(target)).</p>
+        <div class="bar"><span>Python code</span>
+          <div class="code-actions"><button onclick="dlCode(this, 'q16.py')" class="dl-code-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg> Download q16.py</button><button onclick="dlCSV(this, 'breast_cancer.csv')" class="dl-csv"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg> Download breast_cancer.csv</button><button onclick="toggleCode(this)" class="code-toggle">Hide code</button></div>
+        </div>
+        <pre class="code"><code># ======================================================
+# Experiment 07 / 15
+# Maximum Likelihood Estimation (MLE)
+# ======================================================
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_breast_cancer
+
+# -----------------------------------------------------
+# Load Dataset
+# -----------------------------------------------------
+data = load_breast_cancer(as_frame=True)
+df = data.frame
+df[&quot;target&quot;] = data.target
+print(&quot;=&quot; * 60)
+print(&quot;First Five Records&quot;)
+print(&quot;=&quot; * 60)
+print(df.head())
+
+# -----------------------------------------------------
+# Bernoulli Distribution MLE
+# -----------------------------------------------------
+target = df[&quot;target&quot;]
+p_hat = np.mean(target)
+print(&quot;Maximum Likelihood Estimation (MLE)&quot;)
+print(&quot;Estimated Probability =&quot;, round(p_hat, 4))
+print(&quot;Malignant =&quot;, sum(target == 0))
+print(&quot;Benign =&quot;, sum(target == 1))
+
+target.value_counts().plot(kind=&quot;bar&quot;, color=[&quot;green&quot;, &quot;red&quot;])
+plt.title(&quot;Bernoulli Distribution - Target Classes&quot;)
+plt.xlabel(&quot;Target Class&quot;)
+plt.ylabel(&quot;Count&quot;)
+plt.xticks([0, 1], [&quot;Benign&quot;, &quot;Malignant&quot;], rotation=0)
+plt.show()</code></pre>
+        <div class="bar"><span>Output</span></div>
+        <pre class="out">============================================================
+First Five Records
+============================================================
+   mean radius  mean texture  ...  worst fractal dimension  target
+0        17.99         10.38  ...                  0.11890       0
+1        20.57         17.77  ...                  0.08902       0
+2        19.69         21.25  ...                  0.08758       0
+3        11.42         20.38  ...                  0.17300       0
+4        20.29         14.34  ...                  0.07678       0
+
+[5 rows x 31 columns]
+Maximum Likelihood Estimation (MLE)
+Estimated Probability = 0.6274
+Malignant = 212
+Benign = 357</pre>
+        <div class="figs"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjwAAAHGCAYAAABw7lF4AAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjExLjIsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvgI3uAAAAAAlwSFlzAAAPYQAAD2EBqD+naQAAOuxJREFUeJzt3QmcjXX///HPjNmEmbFvY42USsmSlC0l6hcpIRWVWyqUlNy4fyFpRHcbFSUttCqppLImFLIvuRHR2HdjHcyc/+Pz/d/X+Z0zc2bmzDQz58z3vJ6Px2HOdb7nOtd1ne19vtsV5nK5XAIAAGCx8EBvAAAAQH4j8AAAAOsReAAAgPUIPAAAwHoEHgAAYD0CDwAAsB6BBwAAWI/AAwAArEfgAfJZy5YtpXfv3rlalp/bkJ98Pd4111wjAwYMKLBtyGw7UDjo6+WZZ54J9GbAIhGB3gCEltdff13GjBnjvh4WFiZlypSRyy67TPr16yfXXXed2Gbfvn1mH3OzzJf27dvLqlWr3MevePHiUrZsWbnqqqvkzjvvlFatWvm1Df7Q50O/eN54440c3c/X4+3Zs0eOHDkieS2rbcztfheUl19+2VyyExERITt27JBgcvnll5vXYmJiYo7uN3/+fJk6daqsXr1akpOTpUKFClK7dm2599575aabbjKv6fx8vSB0EXhQoPQDbvfu3fLjjz9K3bp1Rc9soh9so0ePlhtuuEGmT58uHTp0CMlnZeHChRIZGZltuQMHDkhqaqr89ttv5vrp06fNl+HMmTOlbdu20rx5c5k2bZrEx8fneN3p7d27Vw4fPpzj++X28XIjq20syO3IjX/84x/SuXNnr4DWqFEjeeCBB2TkyJHu5U4ICCb6Pj569Kjf5c+fPy8PPfSQfPbZZ9KnTx8ZP368VKxY0bz/P/nkE2nXrp28+uqr0rdv33zdboQuAg8Coly5cpKQkGD+rlKlinz88ccSFxcnEydODNnAU758eb/LFilSxH381CWXXCJt2rQxX56tW7eWe+65R77//vtcrTsvFPTjBft2ZCY2NtZc0itWrJjX82uDQYMGyUcffSRff/213H777e7lNWvWND92unbtKlu3bg3oNsJu9OFBUIiJiZGoqChT45Perl275IknnpCrr75aLr74Yrn55ptlxowZXmW0rb9evXpy9uxZGTJkiPlbq8c9+47s3LnTBAGtPm/atKl8/vnnPrdFf4FqeNDH0mai/v37m1/eDq1d0S+jsWPHZrjv3Xffbar5A9XfRL84HnzwQfnhhx9k+fLlWa57xYoV5njosbryyivN306tkdJ91GP/zTffmL/1csstt7hvd47rtm3bpFu3bua4Os0bWe3Lli1bpFOnTqa81kZ9+umnXrfn5Phmt42ZbUd2z3FuXjf5RY+Ds29Vq1aVK664wjzHmzZt8iqn+9msWTM5efKk2W4tp02czjHV9TRo0EAuvfRSU7OktWK33Xab2bf05s6dKx07djRBWpubtWZm+/bt7lpa3Rb9X5umnG3T5yar2iCt0bnjjju8wo4n3Xbdr6zoc+s8XvXq1eXaa6+Vf/3rX3LixAmvcosXLzavMT0G+vx2795d1q9fn+My2R2LnK4LgUXgQcBduHBBRo0aJadOnTLt+J5+//13qV+/vqxcuVJeeukl02yjVd9dunQx/YEc2tavVeMPP/yw+SDUX5IajJQu1y9lrUbXD9SvvvrKfMHrOn755Revx3v22WfNF4B+kGqo0v5G2vzWsGFDsx6loUw/wI8fP55hXw4ePGianHJDv3Bz03yUnn6JqTlz5mS6bg0dLVq0MDUJH3zwgWkC0y/Hxx9/3N1vYunSpabJQY+j/q2XKVOmuNehx0N/kesx1w94PeaVKlXKcl902aOPPmruo82XTZo0Mcfbs/9NTo5vdtvoazv8eY5z+rrJTxpknH1btGiROVb79+83AUGb8xy6n7rN2hymX7paa3r99deb23r16mX2W/dDj7s2ffbo0cOU12PqSfsU6e0a8LSpSV8fx44dM01tf/zxh5QoUcJsi/6vQcDZtjfffDPTfdDjq01a2dXeZtd0p8+t83j6+n766afNfnqGLe0bpLWclStXNq9Jp7lMj4sGP3/L+HMscrIuBAEXUIBGjhypVTiucuXKuSpXruyqVKmSKyoqyhUdHe164403MpRv1qyZq2rVqq6TJ096LR86dKjroosuch09etRc79mzp1nvhAkTMqyjfPnyrpiYGNeuXbvcy86fP++qUKGCq2vXru5l27dvd4WHh7seeeQRr/vv2LHDFRkZ6XrooYfc99XH0m1Ir0WLFq5rr73Wa1mdOnVcd911V66W+aLr12OXmbVr15rt6927d6brfvPNN02ZI0eOeN03LS3NXBzV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AGA9Ag8AALBeRKA3AACQT8LCOLShxOUK9BYENWp4AACA9Qg8AADAejkOPG+99ZY899xzOb4NAACg0ASeU6dOSXJyss/bjh07JmfPns2L7QIAACj4Tst//PGHbNiwQTZu3ChHjx6VGTNmZAhCn376qTz++ON5t3UAAAAFGXhmzZolQ4YMkfPnz4vL5ZK5c+d63R4bGystWrSQbt265cV2AQAAFHyTltbcnDx5UsaPHy/Dhw83f3te9uzZI5988okULVrUr/WlpaWZGqHbb79dLr/8cmnbtq18+eWXPpvJ9LG1TIMGDWTMmDGSmpqa4zIAACB05Xgenl69euXJA7/22muyfPly6d27t9SoUUMWLVpkaoc0UHk+RocOHeT06dMyceJE05T20EMPyeHDh+XFF1/MURkAABC6wlzaPpVDFy5ckDlz5siff/4p586d87pNa1iaNWvm1zoiIrzz1sMPPyyrV6+W3377zVxfsGCB3HjjjabfUN26dc2yd955R/r16yf79++XuLg4v8pkRztha7njx4+bprlQEjaCiclCiWsYE5OFFCYeDC0hOPFgcg6+v3Ncw6OjsK6//noTMKpVqyaRkZFet2tTkj+BJ33Yce5bpEgR9/WffvpJEhIS3EFGadNXSkqK/Prrr+Zvf8oAAIDQluPA8+2335o+O7t375bSpUvn2YZogPr4449l9OjR7mW7du2SChUqeJVzruvj+1smPQ1DenFkNsweAACE6Dw82kG4devWeRp2tMNz+/bt5eabbzZNUZ4dm9PXBGkNUHh4uLtTsj9l0ktMTDRVYM6lSpUqebYvAADAgsBzzTXXmH42eWXfvn2mD07t2rVl2rRpJqg4ypQpYzofezpy5IgJOWXLlvW7THqDBw827X3OJSkpKc/2BwAAWNCkpTU7WnPSuXNnufvuu6VEiRJet+uIqzp16vi1Lu1UrGFH+wLpRIbR0dFetzdu3FhefvllOXDggJQrV84sW7x4sfm/YcOGfpdJTx8n/WMBAAB75XiUloaLZ555JtPbn3rqKb+Ggx88eFBatmxpmpM07MTExGQoc+bMGROetAlNh5zrbM433XSTVKpUyfQl8rdMdhilhVDBKK0Qwyit0MIoLcnTJq0BAwaYIeWZXfyd++aVV16R33//XdatWyeXXnqpVK9e3Vzq1avnLqOTGGpoWbFihZQsWVLKly9vanHee++9HJUBAAChLVfz8OQFnSBQ+8+kp314qlat6rNGKCoqKst5dfwp4ws1PAgV1PCEGGp4Qgs1PJKnfXg2bdokK1euzPR2nQ9HOzZnR2tj9OKvzDog57QMAAAIPTkOPDrR34gRI7yWab8ZnZvnoosukkGDBvkVeAAAAApKjvvwPProo2YoueflxIkT5hQP2gG5b9+++bOlAAAABRV4MqMjrm655Rb56quv8mqVAAAAwRV4lDZpMYkfAAAo9H14dLLA9KFGJyJcv369TJgwQT788MO83D4AAICCDzxTpkyRgQMHZliuI670PFi33377398qAACAQAYeDTX/+Mc/vFcSESHFixfPy+0CAAAIXODhPFQAAMD6wOPYsWOHzJ49W3bt2iUVK1aUVq1amVNEAAAAWDFKS08gqifsHDp0qDmP1ciRI+WKK66QIUOG5P0WAgAAFHTg0VNLaLDRk3MeOHBAVq9eLXv27DHB5/XXX5eff/75724TAABAYAPPwoULpWPHjtKtWzcJ8zgxXbt27aRXr14yf/78vN1CAACAgg48GnJ03h1fLly4YM52DgAAEExynE5at24t33zzjUyaNMkEHOVyueTzzz83y9q0aZMf2wkAAFBwgadWrVoyfvx4efLJJyU2NlZq1KghJUqUkO7du8vw4cOlSZMmud8aAACAYBmWrhMPtm/f3pwh3RmW3qxZM3O2dAAAAGvm4SlXrpx06dIlb7cGAAAg0E1aOt/O3Llzfd62atUq08wFAABQaAPPvn375P3335fmzZv7vL1+/fpmSLrO0wMAAFAoA8+yZcvk6quvlqioqEyHq19//fWyaNGivNw+AACAggs8f/31l1SuXDnLMgkJCaYcAABAoQw8JUuWzDbM7Ny505QDAAAolIFHh53/+OOPsnnzZp+3792710w+2LJly7zcPgAAgIILPNWqVZN7773XBJ833nhDtm3bJmfPnpUdO3aYzszXXnuttGjRQho0aPD3twoAACBQ8/DoDMt6Gol+/fqZ/z116tRJJk+enJfbBgAAUPCBJyYmRt59913517/+JT///LMcOnRI4uPj5YYbbpA6derkzRYBAAAEw0zLev4svQAAAFh58lAAAIDChsADAACsR+ABAADWI/AAAADrEXgAAID1CDwAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKyXq1NL5KUVK1bIZ599JuXKlZOBAwd63Xbu3DkZMGBAhvvcf//95uzsnmbPni3z5s0z5/u66667pF69evm+7QAAoHAIWA3PhQsXpFGjRtK7d29zIlINPelp4HnjjTdMiLn00kvdl7i4OK9ygwcPli5dukhYWJjs27dPGjZsKNOnTy/AvQEAAMEsYDU8Gk7efPNNE3r69+8vixcvzrRsp06dpEmTJj5v27Jli4wZM0a++uorad++vVmmgahv377mekREwCuxAABAqNbwFClSxIQdf7z33numuWvChAly6NAhr9tmzpwpsbGxctttt3k1ee3du1d+++23PN9uAABQ+AR9p+VSpUpJZGSkxMfHy0cffSR16tSR5cuXu2/funWrVK1a1QQoR82aNd23+ZKSkiLJycleFwAAYK+gbu/RvjsbN26UChUqmOtDhw6VDh06SK9evWTt2rVm2ZkzZ6REiRJe9ytWrJgJQKdPn/a53sTERBkxYkQB7AEAAAgGQV3Do/1vnLDjuPfee2XdunVy4sQJc7148eJy7NgxrzJaY5OammqaunzRTs7Hjx93X5KSkvJxLwAAQKAFdeDJrDnKGeWlLr/8ctmxY4ecPXvWXWbTpk3m/7p16/pcR3R0tAlDnhcAAGCvoA482un4yJEj7uvaRKXD1LWzc8mSJc0ybeLS8PPBBx+4y2kZ7etz1VVXBWS7AQBAcAloH54XXnhB9uzZY4ak6/86lFy9/PLLEhUVZZqbrr/+eqldu7bptPzTTz+Z/z3n7KlUqZKMGzdOnnjiCfnhhx9MQNImr1mzZpmh7wAAAAENPDVq1DDNSTqZoCcnqNx0002mlkcnJjx48KDprNy0aVOvEVlKl994442mnDZX3XLLLVK6dOkC3RcAABC8wlwul0tCnHZy1skKtUYp1PrzhI2gFiyUuIaF/Ns9tFDLHVpC8Os8OQff30HdhwcAACAvEHgAAID1CDwAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKxH4AEAANYj8AAAAOsReAAAgPUIPAAAwHoEHgAAYD0CDwAAsB6BBwAAWI/AAwAArEfgAQAA1iPwAAAA6xF4AACA9Qg8AADAegQeAABgPQIPAACwHoEHAABYj8ADAACsR+ABAADWI/AAAADrEXgAAID1CDwAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKxH4AEAANYj8AAAAOsReAAAgPUIPAAAwHoEHgAAYD0CDwAAsF5EoDfgwoULsmTJEomKipLrrrvOZ5lTp07JqlWrJCYmRq655hopUqRIrsoAAIDQFLDAk5aWJiNHjpTJkyfLmTNnpGrVqrJixYoM5b7//nvp1q2bVK5cWZKTkyU6OlpmzZoltWvXzlEZAAAQugLWpJWammpCj9buaFjx5ejRo+a2J554QjZs2CB//vmn1KpVS7p3756jMgAAILQFLPBERkbKiBEjJCEhIdMyX3/9tZw+fVoGDBhgrmsz1cCBA2Xp0qWyefNmv8sAAIDQFtSdltesWSM1a9aU2NhY97L69eub/9euXet3mfRSUlJM05fnBQAA2CuoA8+xY8ekVKlSXsvi4+MlPDzcNGX5Wya9xMREiYuLc1+qVKmSj3sBAAACLagDj47c0g7Nns6dO2f6/uht/pZJb/DgwXL8+HH3JSkpKR/3AgAABFpQB57q1avLrl27xOVyuZc54URv87dMejqKS5vAPC8AAMBeQR142rZtKwcPHpRffvnFvezLL780AcWZs8efMgAAILQFdOJBHZJ+4sQJ2blzp+k4/MMPP5jlN998sxltpRMI6pBzvTz77LNy5MgRGT58uIwZM8ZMMKj8KQMAAEJbmMuzLaiAPfLII7Jjx44My2fMmOEOKzoT88SJE2X+/PmmKapLly7SoUMHr/L+lMmKhi3tvKz9eUKteStsRFigNwEFyDUsYG93BEIY7++QEriv84DJyfd3QANPsCDwIFQQeEIMgSe0hODXeXIOAk9Q9+EBAADICwQeAABgPQIPAACwHoEHAABYj8ADAACsR+ABAADWI/AAAADrEXgAAID1CDwAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKxH4AEAANYj8AAAAOsReAAAgPUIPAAAwHoEHgAAYD0CDwAAsB6BBwAAWI/AAwAArEfgAQAA1iPwAAAA6xF4AACA9Qg8AADAegQeAABgPQIPAACwHoEHAABYj8ADAACsR+ABAADWI/AAAADrEXgAAID1CDwAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKxH4AEAANYL6sBz6tQpiYmJyXCZMmWKV7k9e/ZI586dpXTp0lK5cmUZMGCApKSkBGy7AQBAcImQIOZyuUxwWbhwoTRu3Ni9PDIy0v13amqq3HbbbSbsLFu2TI4ePSp33XWXCUsTJ04M0JYDAIBgEtSBxxEVFWVqdnyZPXu2rFmzRrZt2yY1a9Y0y1544QV54IEHZNSoUVKmTJkC3loAABBsgrpJy9GxY0cpWbKkNGzYUN555x1T8+NYvHixVKtWzR12VOvWrU3Nz9KlSwO0xQAAIJgEdQ1PWFiYdO/eXZ588kmpWLGifP/999KnTx85dOiQDB482JTZu3evlCtXzut+ZcuWNffdt2+fz/VqM5lnH5/k5OR83hMAABBIQV3DU6xYMfnggw/k6quvlvLly5tmqmeeeUZefPFFr3Lh4d67oWFHedYEeUpMTJS4uDj3pUqVKvm4FwAAINCCOvD4Ur9+fTl+/Ljs37/fXNcgdPDgQa8yWgOkYUdv80Vrh3QdziUpKalAth0AAARGoQs8GzduNB2Y4+PjzfXrrrtOtm/f7hVaFixYYGp9PEd2eYqOjpbY2FivCwAAsFdQB563335bJk2aJAcOHDB9bmbMmGGas3r16mVCi2rXrp1ceuml0rdvX1Ozs3XrVhk2bJjcc889UqFChUDvAgAACAJBHXjuvPNOWb9+venDo31tBg0aJM8++6y8/PLLXnPyfPfdd3L69GmpVKmSKdu0aVOZMGFCQLcdAAAEjzBXZj17g4xuptMZOTNpaWkZOjD7Q0dpaaDS/jyh1rwVNiLrYwq7uIYVirc78ko2n5mwTOH4Os9TOfn+DuoaHk/ZhR2Vm7ADAADsR0IAAADWI/AAAADrEXgAAID1CDwAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKxH4AEAANYj8AAAAOsReAAAgPUIPAAAwHoEHgAAYD0CDwAAsB6BBwAAWI/AAwAArEfgAQAA1iPwAAAA6xF4AACA9Qg8AADAegQeAABgPQIPAACwHoEHAABYj8ADAACsR+ABAADWI/AAAADrEXgAAID1CDwAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKxH4AEAANYj8AAAAOsReAAAgPUIPAAAwHoEHgAAYL0IsUBaWppMnTpV5s2bJzExMdK5c2dp3bp1oDcLAAAECStqeHr37i3//Oc/pX79+lKhQgVp166dTJo0KdCbBQAAgkShr+FZt26dCTfz58+XVq1amWUREREyaNAg6d69u0RFRQV6EwEAQIAV+hqe77//XsqUKSMtW7Z0L9MmrSNHjsjSpUsDum0AACA4FPoanu3bt0tCQoKEhYW5l1WrVs19W/PmzTPcJyUlxVwcx48fN/8nJydLyDkb6A1AQQrJ1zgQKkLw/Z383312uVz2Bx4NLhdddJHXMu24XKRIETl71ve3eWJioowYMSLD8ipVquTbdgLBIG50XKA3AUB+iQvd9/eJEyckLpv9L/SBR3fw6NGjXsuOHTsmqampEh8f7/M+gwcPlgEDBniN8tImsNKlS3vVFMHeXwQabpOSkiQ2NjbQmwMgD/H+Di0ul8uEnUqVKmVbttAHnnr16snEiRPl5MmTUrx4cXdHZuc2X6Kjo83FU2bhCPbSsEPgAezE+zt0xPlZs1XoOy136NBBIiMj5Y033nCnvZdfftkMUa9bt26gNw8AAASBQl/DoyO0PvjgA+nRo4fMmDHDNGdpbY+O3gIAALAi8Kg777zTDEtftmyZaapq2rSp6bgM+KKvkWHDhmVo1gRQ+PH+RmbCXP6M5QIAACjECn0fHgAAgOwQeAAAgPUIPICI/PXXX7J+/XqOBRDk703eqwjpTsuwz+7du+XPP/90Xy9RooTUqFEj3+bNefvtt2Xx4sXy008/5cv6gVB635YtW1bq1KnjdZtODrd27VrTqbhRo0a5fm8G+3t1586dZl+vuOKKQG8K0iHwICh98sknZkbsa6+91n2+sz/++MPMkD1q1Kg8fzw9/5pzTjUAuX/fDhw4UKpWrWqCT3j4/zUivPXWWzJo0CCpXLmy7Nq1y9r3qu7nihUrZO7cuYHeFKRD4EFQz56pv+Qc3377rbRv395cnCDk0NOLbNu2zUwvnn6Kcf3gPXPmjJmIUj9oda6mSy65RKKiotxlbrnlFmnSpEmGbdi8ebOZzLJWrVqyb98+cwoSZwZvf9YLhJoKFSqYU/voF36bNm3cyydPniwNGzaUvXv3upfp3/q+dWpxa9euneHciOnl13vVn23Jbj1aw6XLNZA5n12XXXaZOW0RAo/Ag0KjcePG5v/9+/e7l+kH61NPPWU+TC+++GLzgaMfch9//LGUK1fOlHnttddk0aJFZm4mDUZa3awnl509e7b5sPJVTa7n49FZvH/77TfTlKYfbDp794EDB2Tp0qV+rxcINfoe0Ilg3333XXfg0feJBpB7773XnArI8euvv5qZ8ZWGBA0UL774ovTp0yfT9efXe9WfbcluPXrbwoULzfJ//vOf5j7PP/+8mScOgUfgQdC6cOGC+1eSfqhNmDDB/Fpq3bq1u8yYMWNkwYIFprlLA05KSop06dJF+vfvb0KPY/Xq1TJz5ky59dZbzXrbtm0rI0aMkI8++sjnYycmJppfatu3bzfrXbVqlZnQ8uqrr/Yql9P1AqHgoYceMn1YNOSUKlVKJk2aJPfff785DVD6SWP14liyZIncdNNN5pK+D1Bm8uq96u+2ZLWerl27ypo1a2jSClKM0kLQOnXqlPmVpJchQ4aY8NO7d28pVqyYu8ybb75pPnj0w05/oa1cuVJuuOEGmTVrlte6tCpdy6mIiAjzd1ajsqZMmSL9+vVz1xJdc8010rFjxwzlcrpeIBRobas2O02dOtX8WPniiy9MCPIlLS3N1Kbo+1ebpLRJWsOGv/LyverPtvCeL7yo4UGh6cOzZcsW82Gj7eWPPvqoaUvXX3bat0erkj3pr8uzZ8+6TzHifBg6tG3+9OnTPh/33LlzsmfPngzNUnrdc+RYTtcLhJKePXvK2LFjTa2ONjNffvnl5r3qSZuhtJlLm6G0o7O+Xw8ePGj64PgjL9+r/m4L7/nCi8CDQkM/xLSqWk8Sq4FHP0i1/Vz78Dz44IN59ji6Xv2w05PQekp/HUDm7rrrLunbt68899xzMnLkSJ9ltMZWa1q074wzouvSSy81NS0F/V79u9uC4EeTFgoV/bUVHx/vrpbW5iutNk/v74STsLAwUy0+Z84cr+Xz5s3L9TqBUFO0aFF5+umnzQ8V7Vfni9bCtGjRwh0wtm7davrjBeK9+ne3xXO/z58/n+P7If9Rw4NC0WlZ+/Nozc6GDRvk1VdfdZfRX2OtWrUynQ21U6T+GtNREjrEdNq0abl+bD2buv7aq1ixohkd9umnn5omtauuuipP9g0IBf/617/MJTM33nij6fCrP150ZNPw4cPN34F4r+bFtqgrr7zSfC5Nnz7dNH8xLD14EHgQlBISEkw/HGdop7a3a0dIbWfXIacO/XWnoyLGjx9vOjBr7Y8GoJdeesldpmbNmmZ2V0/64aj9gTKbzOzmm2+Wr7/+2gyB1VEZWpNUvnx5MwIkJ+sFQu1960wf4UuVKlW8bteh6zrK6vXXXzd99kaPHi0//vij6UOT2Xszv96r/myLP+u54447TM2Qrk+3k2HpwSPMpV3RAXjRKmntH+Q5U6z2H9IPa88aJgCBxXsV/qKGB/BBR2d0797dDKXVWVe1mlyb095//32OFxBEeK/CX9TwAJn4+eefzQzO2lFaJx578sknpXr16hwvIMjwXoU/CDwAAMB6DEsHAADWI/AAAADrEXgAAID1CDwAAMB6BB4A8MPs2bNl06ZNHCugkGIeHgC5orNeb9u2LcsynTt39pq8saDpTLk6lYBOK+DPmbdXrlxppiHQ2XP17N46B5NjyJAh0qlTJ3OqAACFD4EHQK7oNP7z5893X//888+lQYMG5hQgnmfMDmTgGTRokNx3333ZBh49DYCexqRMmTLmDNkHDhyQnTt3mokn9WzfAAo/Ag+AXHn44YfNxfHFF19Iz5495ZFHHjHXN2/eLF9++aX5OzY21pxUUc+l5GnFihWSkpIiV199tfzyyy9y9uxZuf32281thw8fliVLlkjZsmXN+dP0dj0Zo55jzZGamirLli2TQ4cOmbNya1hx/PTTT3Ls2DFzrjWdKVtpDU36E0Jq2NH9+Pjjj73O6n369Gn55JNPMt3/RYsWye7du80Zu3W7dB9KliyZodz69evNmbhr1KhhjoG/twHIWwQeAPli69at5gz3SoOHnvlea1z+93//111m0qRJJsho6NGmp1q1apnAs2DBAunQoYO5ridy3L9/vzln0r333usOPHqCRi2r5zzTkzpqE1uLFi3ko48+Mss0LOnJGzdu3CgXLlww9+nYsaNX4NF1Dh48WB544AGvsOOcsFYDXGZ+/fVX9wkq//rrL9O/Rx9bz9zthLG7777b7N+1114ru3btMjVIeqLLyMjITG+LiYnJ0+cBwH/pyUMB4O8qUqSI66233sr09vXr17uio6Ndv//+u3tZ7969XeHh4a5ly5a5l124cMF1ySWXuPr06eNeNmXKFD3JsWvYsGHmelpamuuqq65yDR061F0mOTnZVbt2bde4cePcy7TM2LFjM92mpUuXmvXOnDkz2/1r0KCBKzExMdPbJ06c6KpUqZIrNTXVve7IyEjXoUOH3GXmzZvnOnbsWJa3AcgfjNICkG9OnjxpznM0bdo0c/LV0qVLm2YsT1rDoWehd6xbt062bNkiAwcOdC/Tmh3tSOzZf2jt2rVSrVo105Sm6//+++9NjZDWDvlLOyirqlWr5mr/9u7dK3PmzJHPPvtMfzzKnj17TDOXKlq0qKnl0f123HjjjabGKqvbAOQPmrQA5Itvv/3WnHFem6r0Eh0dbfrFaIdgT55BRiUlJZmOzp4hRPvJaLhx7Nixw/w/b948r/tqXyHPfjzZcUZhaX+hnBo2bJi89NJLpqO29uHRwKN0/7SvUr169WTUqFGm47ZulwYabSK77rrrsrwNQP4g8ADIF0888YQZyu1ZU5OQkOAOBp5hxlOpUqUkLS1NkpOTvWo8jh496v5bQ4IaM2ZMrmtnlHaG1j49S5culZYtW/p9P+2zo6O3li9fLo0aNXL3KZo+fbrX/unIL91/7TitNVE33HCDLFy40Pyf1W0A8h5NWgDyhXY09hwOrqHCae7Jio5W0poX7cDr+M9//mOauRxNmjQxYWjChAle99Wwoc1MjuLFi5uRX5nRUVUPPvigjB071ue2abDJqinMc/80tHg6ePCg6RStHai1FigxMdE0uWlIyuo2APmDGh4A+UJHWT311FOmX4vWzrz22msmgGRHg4zWDD322GNmLhy9Pm7cOFOr49QG6XomTpxomsy0CUxHZ2kI0VFhWrN0//33m3INGzY0Q8u1ZklHP/kalv7KK6+YUVI6rLxXr17ueXh01Jcu19Fe6WmTlA4l1/V17drV9DvSEVrph5z37dvXjMbSUWQaZvRYtGvXLsvbAOQPangA5Akd1q21FI7JkydLnz59TM2OBgjt06PXPfvYaHOQryYcbe7R+XF0jhoNHVOnTjX9YjxnPtbH0+Yg7dujc+LoTMl6HyfsqJEjR0qPHj3MnDwahrSjcHrFihWTWbNmmbl6dPj63LlzTQ2Mrl/X67jlllukbt265m8NTxqEdPt13RrK9LreR5vklPbLmTlzpqnF0TI67Fy3V2dqzuo2APkjTIdq5dO6ASBXjhw54g4OSoOPNh/piCitzQGAnKJJC0DQ0dFXH374oZnET4e2jx8/3tSKNG/ePNCbBqCQooYHQFD64YcfzNw62gyl8/ToObECeV4uAIUbgQcAAFiPn0sAAMB6BB4AAGA9Ag8AALAegQcAAFiPwAMAAKxH4AEAANYj8AAAAOsReAAAgPUIPAAAQGz3/wASXDkSQHfYrQAAAABJRU5ErkJggg==" alt="q16 plot"></div>
+        <p class="read"><b>How to read it.</b> Estimated probability p_hat = 0.6274 indicates approximately 62.7% of the samples are benign (1) and 37.3% are malignant (0). The bar chart visually displays target class counts.</p><button class="btn-top" id="btnTopq16" onclick="scrollToTop()" aria-label="Back to top">↑ Top</button>
+      </section>
+      <section id="q17">
+        <h3>Q17. California Housing: Central Limit Theorem (CLT) Simulation</h3>
+        <p class="q"><b>Question.</b> Demonstrate the Central Limit Theorem (CLT) by repeatedly sampling from the California Housing median income (MedInc) population and computing sample means.</p>
+        <p><b>Concept.</b> The Central Limit Theorem guarantees that the distribution of sample means approaches normality as sample size increases, regardless of the underlying population distribution shape. The mean of sample means closely approximates the true population mean.</p>
+        <div class="bar"><span>Python code</span>
+          <div class="code-actions"><button onclick="dlCode(this, 'q17.py')" class="dl-code-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg> Download q17.py</button><button onclick="toggleCode(this)" class="code-toggle">Hide code</button></div>
+        </div>
+        <pre class="code"><code># =========================================================
+# Experiment 04 / 8
+# Central Limit Theorem (CLT) Simulation
+# =========================================================
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_california_housing
+
+# --------------------------------------------
+# Load Dataset
+# --------------------------------------------
+housing = fetch_california_housing(as_frame=True)
+df = housing.frame
+print(&quot;=&quot; * 60)
+print(&quot;First Five Records&quot;)
+print(&quot;=&quot; * 60)
+print(df.head())
+
+# --------------------------------------------
+# Select Feature
+# --------------------------------------------
+population = df[&quot;MedInc&quot;]
+print(&quot;\nPopulation Size =&quot;, len(population))
+
+# --------------------------------------------
+# CLT Simulation
+# --------------------------------------------
+sample_size = 30
+num_samples = 1000
+sample_means = []
+
+for i in range(num_samples):
+    sample = population.sample(sample_size, replace=True)
+    sample_means.append(sample.mean())
+
+sample_means = np.array(sample_means)
+print(&quot;\nAverage of Sample Means =&quot;, sample_means.mean())
+print(&quot;Standard Deviation =&quot;, sample_means.std())</code></pre>
+        <div class="bar"><span>Output</span></div>
+        <pre class="out">============================================================
+First Five Records
+============================================================
+   MedInc  HouseAge  AveRooms  ...  Latitude  Longitude  MedHouseVal
+0  8.3252      41.0  6.984127  ...     37.88    -122.23        4.526
+1  8.3014      21.0  6.238137  ...     37.86    -122.22        3.585
+2  7.2574      52.0  8.288136  ...     37.85    -122.24        3.521
+3  5.6431      52.0  5.817352  ...     37.85    -122.25        3.413
+4  3.8462      52.0  6.281853  ...     37.85    -122.25        3.422
+
+[5 rows x 9 columns]
+
+Population Size = 20640
+
+Average of Sample Means = 3.8593590466666665
+Standard Deviation = 0.3375122286644541</pre>
+        
+        <p class="read"><b>How to read it.</b> Across 1,000 bootstrap samples of size 30, the average of sample means closely converges to the population mean with a small standard deviation.</p><button class="btn-top" id="btnTopq17" onclick="scrollToTop()" aria-label="Back to top">↑ Top</button>
+      </section>
+      <section id="q18">
+        <h3>Q18. Titanic: Data Preprocessing (Deletion, Mean/Median/Mode Imputation)</h3>
+        <p class="q"><b>Question.</b> Perform data preprocessing on the Titanic dataset: inspect missing values before preprocessing, drop missing values in Embarked, impute Age using mean, Fare using median, and Embarked using mode, then verify missing values and display the first five records.</p>
+        <p><b>Concept.</b> Data preprocessing handles incomplete real-world datasets: deletion drops rows with missing categorical attributes, while imputation fills missing values with descriptive statistics (mean for symmetric numerical features, median for skewed features, and mode for categorical features).</p>
+        <div class="bar"><span>Python code</span>
+          <div class="code-actions"><button onclick="dlCode(this, 'q18.py')" class="dl-code-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg> Download q18.py</button><button onclick="dlCSV(this, 'titanic.csv')" class="dl-csv"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg> Download titanic.csv</button><button onclick="toggleCode(this)" class="code-toggle">Hide code</button></div>
+        </div>
+        <pre class="code"><code>import pandas as pd
+
+df = pd.read_csv("https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv")
+
+print("Missing Values Before Preprocessing:")
+print(df.isnull().sum())
+
+# Deletion method
+df.dropna(subset=["Embarked"], inplace=True)
+
+# Imputation using mean
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+
+# Imputation using median
+df["Fare"] = df["Fare"].fillna(df["Fare"].median())
+
+# Imputation using mode
+df["Embarked"] = df["Embarked"].fillna(df["Embarked"].mode()[0])
+
+print("\nMissing Values After Preprocessing:")
+print(df.isnull().sum())
+
+print("\nFirst Five Records:")
+print(df.head())</code></pre>
+        <div class="bar"><span>Output</span></div>
+        <pre class="out">Missing Values Before Preprocessing:
+PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age            177
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         2
+dtype: int64
+
+Missing Values After Preprocessing:
+PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age              0
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         0
+dtype: int64
+
+First Five Records:
+   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked
+0            1         0       3  ...   7.2500   NaN         S
+1            2         1       1  ...  71.2833   C85         C
+2            3         1       3  ...   7.9250   NaN         S
+3            4         1       1  ...  53.1000  C123         S
+4            5         0       3  ...   8.0500   NaN         S
+
+[5 rows x 12 columns]</pre>
+        
+        <p class="read"><b>How to read it.</b> Missing values are checked before and after preprocessing. Embarked missing values are dropped or filled using mode, Age missing values imputed with mean, and Fare missing values imputed with median.</p><button class="btn-top" id="btnTopq18" onclick="scrollToTop()" aria-label="Back to top">↑ Top</button>
+      </section>
     </main>
   </div>
   <div id="helpModal" class="help-modal" style="display:none">
@@ -2037,13 +2254,17 @@ dtype: float64</pre>
         q7: ['regression'], q8: ['regression'],
         q9: ['classification'], q10: ['classification'],
         q11: ['clustering'], q12: ['pca'],
-        q13: ['validation'], q14: ['importance'], q15: ['importance']
+        q13: ['validation'], q14: ['importance'], q15: ['importance'],
+        q16: ['inference', 'statistics'],
+        q17: ['inference', 'resampling'],
+        q18: ['statistics', 'preprocessing']
       };
       var datasetMap = {
         q1: 'iris', q2: 'diabetes', q3: 'iris', q4: 'mixed',
         q5: 'mixed', q6: 'mixed', q7: 'diabetes', q8: 'diabetes',
         q9: 'iris', q10: 'iris', q11: 'iris', q12: 'iris',
-        q13: 'breast-cancer', q14: 'breast-cancer', q15: 'breast-cancer'
+        q13: 'breast-cancer', q14: 'breast-cancer', q15: 'breast-cancer',
+        q16: 'breast-cancer', q17: 'housing', q18: 'titanic'
       };
       var aliases = {
         'pca': 'principal component analysis dimensionality reduction',
